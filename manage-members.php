@@ -1,5 +1,5 @@
 <?php
-include 'common.php';
+// include 'common.php';
 include 'header.php';
 include 'menu.php';
 ?>
@@ -89,6 +89,55 @@ include 'menu.php';
                 </div>
                 <div class="col-mb-12 col-tb-4" role="form">
                     <?php HuifengMembers_Plugin::form()->render(); ?>
+
+                    <script type="text/javascript" src="/usr/plugins/HuifengMembers/fullAvatarEditor/scripts/swfobject.js"></script>
+                    <script type="text/javascript" src="/usr/plugins/HuifengMembers/fullAvatarEditor/scripts/fullAvatarEditor.js"></script>
+                    <script type="text/javascript">
+                        swfobject.addDomLoadEvent(function () {
+                            var swf = new fullAvatarEditor("fullAvatarEditor.swf", "expressInstall.swf", "swfContainer", {
+                                    id : "swf",
+                                    upload_url : "/upload.php?userid=999&username=looselive",
+                                    method : "post",
+                                    src_url : "/samplePictures/Default.jpg",
+                                    src_upload : 2
+                                }, function (msg) {
+                                    switch(msg.code)
+                                    {
+                                        case 1 : alert("页面成功加载了组件！");break;
+                                        case 2 : alert("已成功加载图片到编辑面板。");break;
+                                        case 3 :
+                                            if(msg.type == 0)
+                                            {
+                                                alert("摄像头已准备就绪且用户已允许使用。");
+                                            }
+                                            else if(msg.type == 1)
+                                            {
+                                                alert("摄像头已准备就绪但用户未允许使用！");
+                                            }
+                                            else
+                                            {
+                                                alert("摄像头被占用！");
+                                            }
+                                        break;
+                                        case 5 : 
+                                            if(msg.type == 0)
+                                            {
+                                                if(msg.content.sourceUrl)
+                                                {
+                                                    alert("原图片已成功保存至服务器，url为：\n" +　msg.content.sourceUrl);
+                                                }
+                                                alert("头像已成功保存至服务器，url为：\n" + msg.content.avatarUrls.join("\n"));
+                                            }
+                                        break;
+                                    }
+                                }
+                            );
+                            document.getElementById("upload").onclick=function(){
+                                swf.call("upload");
+                            };
+                        });
+                    </script>
+                    
                 </div>
         </div>
     </div>
