@@ -30,10 +30,9 @@ class HuifengMembers_Plugin implements Typecho_Plugin_Interface
 		$info = HuifengMembers_Plugin::membersInstall();
 		Helper::addPanel(3, 'HuifengMembers/manage-members.php', '会员列表', '管理会员列表', 'administrator');
 		Helper::addAction('huifeng-members-edit', 'HuifengMembers_Action');
-
 		Typecho_Plugin::factory('Widget_Abstract_Contents')->contentEx = array('HuifengMembers_Plugin', 'parse');
-		Typecho_Plugin::factory('Widget_Abstract_Contents')->excerptEx = array('HuifengMembers_Plugin', 'parse');
-		Typecho_Plugin::factory('Widget_Abstract_Comments')->contentEx = array('HuifengMembers_Plugin', 'parse');
+        Typecho_Plugin::factory('Widget_Abstract_Contents')->excerptEx = array('HuifengMembers_Plugin', 'parse');
+        Typecho_Plugin::factory('Widget_Abstract_Comments')->contentEx = array('HuifengMembers_Plugin', 'parse');
 		return _t($info);
 	}
 
